@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Clemencharts</title>
+        
+        <script src='chart.min.js'></script>
+        <script src='chart.stackedBar.js'></script>
+
+        <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Roboto|Arvo:700" rel="stylesheet" type="text/css" />
+
+        <style>
+            .canvas-holder {
+                width:600px;
+                height:450px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 100px;
+            }
+            .graph-legend li span {
+                display: block;
+                width: 14px;
+                height: 14px;
+                border-radius: 7px;
+                float: left;
+                margin-top: 4px;
+                margin-right: 8px;
+            }
+            .graph-legend {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                font-size: 14px;
+                margin-top : 10px;
+            }
+            .graph-legend li {
+                margin-bottom : 10px;
+                width:200px;
+                display: inline-block;
+                zoom:1;
+                *display:inline; /* this fix is needed for IE7- */
+            }
+            .graph-legend li:first-letter {
+                text-transform: capitalize;
+            }
+            .comm-how {
+                display: inline-block;
+                float : left;
+                color : #979797;
+                width : 25px;
+                text-align: right;
+                margin-right : 10px;
+            }
+            .graph-title {                
+                font-family:Georgia,serif;
+                color:#4E443C;
+                font-variant: small-caps; 
+                font-size: 30px;
+                text-transform: none; 
+                font-weight: 100; 
+                margin-bottom: 0;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .graph-description {
+                font-family: "Roboto",sans-serif;
+                color:#4E443C;
+                font-size: 14px;
+                text-transform: none; 
+                font-weight: 100; 
+                margin-bottom: 0;
+                margin-top: 15px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .legend-text {                
+                font-family:Georgia,serif;
+                color:#4E443C;
+                font-variant: small-caps; 
+                font-size: 14px;
+            }
+            .title {
+                font-family:"Arvo",serif;
+                font-weight:bold;
+                color:#4E443C;
+                font-size: 62px;
+                text-transform: none; 
+                font-weight: 100; 
+                margin-bottom: 0;
+                margin-top: 10px;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+            .title-front {
+                color:#FF5959;
+            }
+            .title-back {
+                color:#6EC5E9;
+            }
+            .subtitle {
+                font-family:"Roboto",serif;
+                color:#003A6F;
+                font-size: 26px;
+                font-style: italic;
+                text-transform: none;                 
+                font-weight: 100; 
+                margin-bottom: 0;
+                margin-top: 10px;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+            .with-padding-below {
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="title" class="title"><span class="title-front">CLEMEN</span><span class="title-back">CHARTS</span></div>
+        <div id="subtitle" class="subtitle">because love should be quantified</div>
+
+        <div class="row with-padding-below">
+            <div class="col-md-6">
+                <div id="happinessCanvas" class="canvas-holder">
+                    <div id="happinessTitle" class="graph-title">Quality of Life</div>
+                    <div id="happinessLegend"></div>
+                    <canvas id="happiness" width="600" height="400"></canvas>
+                    <div id="happinessDescription" class="graph-description">
+                        What is not seen: the projected superlinear growth and the lack of an asymptote. This shows that Clementine-induced happiness is unbounded.
+                    </div>
+                </div>  
+            </div>
+            <div class="col-md-6">
+                <div id="familyCanvas" class="canvas-holder">
+                    <div id="familyTitle" class="graph-title">Family</div>
+                    <div id="familyLegend"></div>
+                    <canvas id="family" width="600" height="400"></canvas> 
+                    <div id="familyDescription" class="graph-description">
+                        "And the size of his family grew two times that day."
+                    </div>                               
+                </div>                
+            </div>
+        </div>
+
+        <div class="row with-padding-below">
+            <div class="col-md-6">                
+                <div id="passionsCanvas" class="canvas-holder">
+                    <div id="passionsTitle" class="graph-title">Passions and Hobbies</div>
+                    <div id="passionsLegend"></div>
+                    <canvas id="passions" width="600" height="400"></canvas> 
+                    <div id="passionsDescription" class="graph-description">
+                        Clementine has only added to my list of passions and emboldened what was already there, never taken away or reduced. Life is being lived more fully.
+                    </div>                               
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="enthusiasmCanvas" class="canvas-holder">
+                    <div id="enthusiasmTitle" class="graph-title">Enthusiasm</div>
+                    <div id="enthusiasmLegend"></div>
+                    <canvas id="enthusiasm" width="600" height="400"></canvas> 
+                    <div id="enthusiasmDescription" class="graph-description">
+                        My existential dread has been replaced almost entirely with a deep passion for circus.
+                    </div>                               
+                </div>    
+            </div>
+        </div> 
+
+        <div class="row with-padding-below">
+            <div class="col-md-6">                
+                <div id="placesCanvas" class="canvas-holder">
+                    <div id="placesTitle" class="graph-title">Mobility and Adventure</div>
+                    <div id="placesLegend"></div>
+                    <canvas id="places" width="600" height="400"></canvas> 
+                    <div id="placesDescription" class="graph-description">
+                        I had never been blessed by an elderly Brazilian woman. I had never lived on a communal Mexican ranch.
+                    </div>                               
+                </div>  
+            </div>
+            <div class="col-md-6">
+                <div id="sunburnCanvas" class="canvas-holder">
+                    <div id="sunburnTitle" class="graph-title">Sunburns</div>
+                    <div id="sunburnLegend"></div>
+                    <canvas id="sunburn" width="600" height="400"></canvas> 
+                    <div id="sunburnDescription" class="graph-description">
+                        Dermatologists are starting to believe that there is a correlative link between sunburns and good times: the gnarlier the sunburn, the better the time seems to have been.
+                    </div>                               
+                </div>  
+            </div>
+        </div> 
+
+        <div class="row with-padding-below">
+            <div class="col-md-6">
+                <div id="skillsCanvas" class="canvas-holder">
+                    <div id="skillsTitle" class="graph-title">Physical Capability</div>
+                    <div id="skillsLegend"></div>
+                    <canvas id="skills" width="600" height="400"></canvas> 
+                    <div id="skillsDescription" class="graph-description">
+                        Body by Clementine. She hasn't helped my height at all, though.
+                    </div>                               
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="careerCanvas" class="canvas-holder">
+                    <div id="careerTitle" class="graph-title">Career Growth</div>
+                    <div id="careerLegend"></div>
+                    <canvas id="career" width="600" height="400"></canvas> 
+                    <div id="careerDescription" class="graph-description">
+                        It's not just correlative. It's causative.
+                    </div>                               
+                </div>
+            </div>
+        </div> 
+    </body>
+</html>
+
+<script>
+            Chart.defaults.global.scaleFontFamily = "'Roboto',sans-serif";
+            Chart.defaults.global.scaleFontSize = 11;            
+
+            // happiness chart 
+            var happinessData = {
+                labels : ["Pre-Clementine","December 2012","February 2013","May 2013","June 2013","November 2013","January 2014","March 2014","September 2014","December 2014", "February 2015","June 2015", "August 2015"],
+                datasets : [
+                {
+                    label: "Happy Points",
+                    fillColor : "rgba(145,237,209,0.4)",
+                    strokeColor : "#04C992",
+                    pointColor : "#02A678",
+                    pointStrokeColor : "#fff",
+                    data : [12,130,154,176,210,283,342,411,498,554,651,753,1000]
+                }
+            ]
+            }
+
+            var happiness = document.getElementById('happiness').getContext('2d');
+            var happinessChart = new Chart(happiness).Line(happinessData, {
+                responsive : true,
+                legendTemplate : "<ul class=\"graph-legend\"><% for (var i=0; i<datasets.length; i++){%><li><div class=\"comm-how\"></div><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><div class=\"legend-text\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></div></li><%}%></ul>"
+            });
+
+            var legendHolder = document.getElementById('happinessLegend')
+                legendHolder.innerHTML = happinessChart.generateLegend();
+                document.getElementById('happinessLegend').innerHTML = happinessChart.generateLegend();
+
+
+            // places chart 
+            var placesData = {
+                labels : ["Pre-Clementine","February 2013","May 2013","January 2014","June 2014","September 2014",
+                "June 2015","August 2015"],
+                datasets : [
+                {
+                    label: "Countries Visited",
+                    fillColor : "rgba(217,145,237,0.4)",
+                    strokeColor : "#BA00ED",
+                    pointColor : "#9900C2",
+                    pointStrokeColor : "#fff",
+                    data : [7,9,10,13,13,13,13,17]
+                },
+                {
+                    label: "Places Lived",
+                    fillColor : "rgba(237,171,145,0.4)",
+                    strokeColor : "#ED4300",
+                    pointColor : "#C23800",
+                    pointStrokeColor : "#fff",
+                    data : [1,1,2,2,3,4,5,5]
+                }
+            ]
+            }
+
+            var places = document.getElementById('places').getContext('2d');
+            var placesChart = new Chart(places).Line(placesData, {
+                responsive : true,
+                legendTemplate : "<ul class=\"graph-legend\"><% for (var i=0; i<datasets.length; i++){%><li><div class=\"comm-how\"></div><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><div class=\"legend-text\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></div></li><%}%></ul>"
+            });
+
+            var legendHolder = document.getElementById('placesLegend')
+                legendHolder.innerHTML = placesChart.generateLegend();
+                document.getElementById('placesLegend').innerHTML = placesChart.generateLegend();
+
+
+            // skills chart 
+            var skillsData = {
+                labels: ["Tricep Definition", "Abdominal Definition", "Height", "Core Strength", "Stamina", "Handstands", "Flexibility"],
+                datasets: [
+                    {
+                        label: "Pre-Clementine",
+                        fillColor: "rgba(220,220,220,0.4)",
+                        strokeColor: "rgba(220,220,220,1)",
+                        pointColor: "rgba(220,220,220,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: [64, 55, 50, 35, 71, 14, 31]
+                    },
+                    {
+                        label: "With Clementine",
+                        fillColor: "rgba(237,171,145,0.4)",
+                        strokeColor: "rgba(237,171,145,1)",
+                        pointColor: "rgba(237,171,145,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: [91, 77, 50, 65, 83, 56, 37]
+                    }
+                ]
+            };
+
+            var skills = document.getElementById('skills').getContext('2d');
+            var skillsChart = new Chart(skills).Radar(skillsData, {
+                responsive : true,
+                pointLabelFontFamily : "'Roboto',sans-serif",
+                pointLabelFontSize : 11,
+                legendTemplate : "<ul class=\"graph-legend\"><% for (var i=0; i<datasets.length; i++){%><li><div class=\"comm-how\"></div><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><div class=\"legend-text\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></div></li><%}%></ul>"
+            });
+
+            var legendHolder = document.getElementById('skillsLegend')
+                legendHolder.innerHTML = skillsChart.generateLegend();
+                document.getElementById('skillsLegend').innerHTML = skillsChart.generateLegend();
+
+            // enthusiasm chart 
+            var enthusiasmData = {
+                labels: ["Circus", "Dairy", "Other People", "Existential Meltdowns"],
+                datasets: [
+                    {
+                        label: "Pre-Clementine",
+                        fillColor: "rgba(220,220,220,0.5)",
+                        strokeColor: "rgba(220,220,220,0.8)",
+                        highlightFill: "rgba(220,220,220,0.75)",
+                        highlightStroke: "rgba(220,220,220,1)",
+                        data: [1, 43, 20, 98]
+                    },
+                    {
+                        label: "Early Clementine",
+                        fillColor: "rgba(145,211,237,0.5)",
+                        strokeColor: "rgba(145,211,237,0.8)",
+                        highlightFill: "rgba(145,211,237,0.75)",
+                        highlightStroke: "rgba(145,211,237,1)",
+                        data: [36, 48, 40, 27]
+                    },
+                    {
+                        label: "Advanced Clementine",
+                        fillColor: "rgba(165,237,145,0.5)",
+                        strokeColor: "rgba(165,237,145,0.8)",
+                        highlightFill: "rgba(165,237,145,0.75)",
+                        highlightStroke: "rgba(165,237,145,1)",
+                        data: [90, 67, 82, 2]
+                    }
+                ]
+            };
+
+            var enthusiasm = document.getElementById('enthusiasm').getContext('2d');
+            var enthusiasmChart = new Chart(enthusiasm).Bar(enthusiasmData, {
+                responsive : true,
+                legendTemplate : "<ul class=\"graph-legend\"><% for (var i=0; i<datasets.length; i++){%><li><div class=\"comm-how\"></div><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><div class=\"legend-text\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></div></li><%}%></ul>"
+            });
+
+            var legendHolder = document.getElementById('enthusiasmLegend')
+                legendHolder.innerHTML = enthusiasmChart.generateLegend();
+                document.getElementById('enthusiasmLegend').innerHTML = enthusiasmChart.generateLegend();
+
+            // passions chart
+            var passionsData = {
+                labels: ["Books", "Basketball", "Music", "Baking", "Exploration", "Spirit", "Circus", "Building"],
+                datasets: [
+                    {
+                        label: "Pre-Clementine",
+                        fillColor: "rgba(145,237,185,0.5)",
+                        strokeColor: "rgba(145,237,185,0.8)",
+                        highlightFill: "rgba(145,237,185,0.75)",
+                        highlightStroke: "rgba(145,237,185,1)",
+                        data: [25, 15, 25, 15, 20, 0, 0, 0]
+                    },
+                    {
+                        label: "With Clementine",
+                        fillColor: "rgba(237,145,197,0.5)",
+                        strokeColor: "rgba(237,145,197,0.8)",
+                        highlightFill: "rgba(237,145,197,0.75)",
+                        highlightStroke: "rgba(237,145,197,1)",
+                        data: [25, 30, 30, 25, 30, 35, 25, 25]
+                    }
+                ]
+            };
+
+            var passions = document.getElementById('passions').getContext('2d');
+            var passionsChart = new Chart(passions).StackedBar(passionsData, {
+                responsive : true,
+                legendTemplate : "<ul class=\"graph-legend\"><% for (var i=0; i<datasets.length; i++){%><li><div class=\"comm-how\"></div><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><div class=\"legend-text\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></div></li><%}%></ul>"
+            });
+
+            var legendHolder = document.getElementById('passionsLegend')
+                legendHolder.innerHTML = passionsChart.generateLegend();
+                document.getElementById('passionsLegend').innerHTML = passionsChart.generateLegend();
+
+            // sunburns chart 
+            var sunburnData = {
+                labels : ["Pre-Clementine","February 2013","August 2013","February 2014","August 2014",
+                "February 2015", "August 2015"],
+                datasets : [                
+                {
+                    label: "Notable Sunburns",
+                    fillColor : "rgba(237,187,21,0.4)",
+                    strokeColor : "#EDBB15",
+                    pointColor : "#B89111",
+                    pointStrokeColor : "#fff",
+                    data : [5,8,11,13,16,17,20]
+                },
+                {
+                    label: "Truly Gnarly Sunburns",
+                    fillColor : "rgba(237,72,21,0.4)",
+                    strokeColor : "#ED4815",
+                    pointColor : "#AD340E",
+                    pointStrokeColor : "#fff",
+                    data : [0,1,2,3,3,3,5]
+                }
+            ]
+            };
+
+            var sunburn = document.getElementById('sunburn').getContext('2d');
+            var sunburnChart = new Chart(sunburn).Line(sunburnData, {
+                responsive : true,
+                legendTemplate : "<ul class=\"graph-legend\"><% for (var i=0; i<datasets.length; i++){%><li><div class=\"comm-how\"></div><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><div class=\"legend-text\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></div></li><%}%></ul>"
+            });
+
+            var legendHolder = document.getElementById('sunburnLegend')
+                legendHolder.innerHTML = sunburnChart.generateLegend();
+                document.getElementById('sunburnLegend').innerHTML = sunburnChart.generateLegend();
+
+            // family chart 
+            var familyData = [
+                {
+                    value: 50,
+                    color:"#FF5959",
+                    highlight: "#FF2B2B",
+                    label: "% Pre-Clementine"
+                },
+                {
+                    value: 50,
+                    color: "#6EC5E9",
+                    highlight: "#33B3E8",
+                    label: "% Came With Clementine"
+                }
+            ];
+
+            var family = document.getElementById('family').getContext('2d');
+            var familyChart = new Chart(family).Pie(familyData, {
+                responsive : true,
+                legendTemplate : "<ul class=\"graph-legend\"><% for (var i=0; i<segments.length; i++){%><li><div class=\"comm-how\"></div><span style=\"background-color:<%=segments[i].fillColor%>\"></span><div class=\"legend-text\"><%if(segments[i].label){%><%=segments[i].label%><%}%></div></li><%}%></ul>"
+            });
+
+            var legendHolder = document.getElementById('familyLegend')
+                legendHolder.innerHTML = familyChart.generateLegend();
+                document.getElementById('familyLegend').innerHTML = familyChart.generateLegend();
+
+            // career chart 
+            var careerData = {
+                labels : ["Pre-Clementine","February 2013","August 2013","February 2014","August 2014",
+                "February 2015", "August 2015"],
+                datasets : [                
+                    {
+                        label: "Official Accolades",
+                        fillColor : "rgba(196,51,232,0.4)",
+                        strokeColor : "#C433E8",
+                        pointColor : "#9425B0",
+                        pointStrokeColor : "#fff",
+                        data : [2,2,4,6,8,8,10]
+                    },
+                    {
+                        label: "Baller Projects",
+                        fillColor : "rgba(51,232,129,0.4)",
+                        strokeColor : "#33E881",
+                        pointColor : "#29C46C",
+                        pointStrokeColor : "#fff",
+                        data : [1,1,2,4,6,7,8]
+                    }
+                ]
+            };
+
+            var career = document.getElementById('career').getContext('2d');
+            var careerChart = new Chart(career).Line(careerData, {
+                responsive : true,
+                legendTemplate : "<ul class=\"graph-legend\"><% for (var i=0; i<datasets.length; i++){%><li><div class=\"comm-how\"></div><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><div class=\"legend-text\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></div></li><%}%></ul>"
+            });
+
+            var legendHolder = document.getElementById('careerLegend')
+                legendHolder.innerHTML = careerChart.generateLegend();
+                document.getElementById('careerLegend').innerHTML = careerChart.generateLegend();
+            
+        </script>
