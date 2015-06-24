@@ -103,7 +103,7 @@
             .subtitle {
                 font-family:"Roboto",sans-serif;
                 color:#003A6F;
-                font-size: 26px;
+                font-size: 23px;
                 /*font-style: italic;*/
                 text-transform: none;
                 font-weight: 100; 
@@ -253,6 +253,30 @@
                 </div>
             </div>
         </div> 
+
+        <div class="row with-padding-below">
+            <div class="col-md-6">
+                <div id="taxonomyCanvas" class="canvas-holder">
+                    <div id="taxonomyTitle" class="graph-title">Taxonomy</div>
+                    <div id="taxonomyLegend"></div>
+                    <canvas id="taxonomy" width="600" height="400"></canvas>
+                    <div id="taxonomyDescription" class="graph-description">
+                        The lone dark spot on an otherwise bright and glimmering record.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="brainCanvas" class="canvas-holder">
+                    <div id="brainTitle" class="graph-title">Cognitive Development</div>
+                    <div id="brainLegend"></div>
+                    <canvas id="brain" width="600" height="400"></canvas>
+                    <div id="brainDescription" class="graph-description">
+                        I didn't even know what latkes were. Now I can identify them almost on-sight.
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row with-padding-below with-height"></div>
 
         <footer class="footer">
@@ -330,7 +354,7 @@
 
             // skills chart 
             var skillsData = {
-                labels: ["Tricep Definition", "Abdominal Definition", "Height", "Core Strength", "Stamina", "Handstands", "Flexibility"],
+                labels: ["Tricep Definition", "Abdominal Definition", "Height", "Core Strength", "Stamina", "Massages", "Handstands", "Flexibility"],
                 datasets: [
                     {
                         label: "Pre-Clementine",
@@ -340,7 +364,7 @@
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: [64, 55, 50, 35, 71, 14, 31]
+                        data: [64, 55, 50, 35, 71, 4, 14, 31]
                     },
                     {
                         label: "With Clementine",
@@ -350,7 +374,7 @@
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(151,187,205,1)",
-                        data: [91, 77, 50, 65, 83, 56, 37]
+                        data: [91, 77, 50, 65, 83, 63, 56, 37]
                     }
                 ]
             };
@@ -426,7 +450,7 @@
                         strokeColor: "rgba(237,145,197,0.8)",
                         highlightFill: "rgba(237,145,197,0.75)",
                         highlightStroke: "rgba(237,145,197,1)",
-                        data: [25, 30, 30, 25, 30, 35, 25, 25]
+                        data: [25, 30, 30, 25, 30, 35, 30, 25]
                     }
                 ]
             };
@@ -534,5 +558,70 @@
             var legendHolder = document.getElementById('careerLegend')
                 legendHolder.innerHTML = careerChart.generateLegend();
                 document.getElementById('careerLegend').innerHTML = careerChart.generateLegend();
+
+            // taxonomy chart
+            var taxonomyData = [
+                {
+                    value: 99,
+                    color:"#23EB98",
+                    highlight: "#1DC47F",
+                    label: "Pre-Clementine ability to discern birds and mammals"
+                },
+                {
+                    value: 1,
+                    color:"#FF5959",
+                    highlight: "#FF2B2B",
+                    label: "With Clementine ability to discern birds and mammals"
+                }
+            ];
+
+            var taxonomy = document.getElementById('taxonomy').getContext('2d');
+            var taxonomyChart = new Chart(taxonomy).Pie(taxonomyData, {
+                responsive : true,
+                legendTemplate : "<ul class=\"graph-legend\"><% for (var i=0; i<segments.length; i++){%><li><div class=\"comm-how\"></div><span style=\"background-color:<%=segments[i].fillColor%>\"></span><div class=\"legend-text\"><%if(segments[i].label){%><%=segments[i].label%><%}%></div></li><%}%></ul>"
+            });
+
+            var legendHolder = document.getElementById('taxonomyLegend')
+                legendHolder.innerHTML = taxonomyChart.generateLegend();
+                document.getElementById('taxonomyLegend').innerHTML = taxonomyChart.generateLegend();
+
+            // brain chart
+            var brainData = {
+                labels: ["Spanish Comprehension", "Spatial Reasoning", "Common Sense", "Creative Thought", "CSS Understanding", "Stress Handling", "Empathy"],
+                datasets: [
+                    {
+                        label: "Pre-Clementine",
+                        fillColor: "rgba(220,220,220,0.4)",
+                        strokeColor: "rgba(220,220,220,1)",
+                        pointColor: "rgba(220,220,220,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: [7, 49, 40, 42, 2, 50, 75]
+                    },
+                    {
+                        label: "With Clementine",
+                        fillColor: "rgba(145,211,237,0.4)",
+                        strokeColor: "rgba(145,211,237,1)",
+                        pointColor: "rgba(145,211,237,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(145,211,237,1)",
+                        data: [39, 53, 50, 58, 31, 65, 88]
+                    }
+                ]
+            };
+
+            var brain = document.getElementById('brain').getContext('2d');
+            var brainChart = new Chart(brain).Radar(brainData, {
+                responsive : true,
+                pointLabelFontFamily : "'Roboto',sans-serif",
+                pointLabelFontSize : 11,
+                legendTemplate : "<ul class=\"graph-legend\"><% for (var i=0; i<datasets.length; i++){%><li><div class=\"comm-how\"></div><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><div class=\"legend-text\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></div></li><%}%></ul>"
+            });
+
+            var legendHolder = document.getElementById('brainLegend')
+                legendHolder.innerHTML = brainChart.generateLegend();
+                document.getElementById('brainLegend').innerHTML = brainChart.generateLegend();
             
         </script>
