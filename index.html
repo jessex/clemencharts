@@ -101,11 +101,11 @@
                 color:#6EC5E9;
             }
             .subtitle {
-                font-family:"Roboto",serif;
+                font-family:"Roboto",sans-serif;
                 color:#003A6F;
                 font-size: 26px;
-                font-style: italic;
-                text-transform: none;                 
+                /*font-style: italic;*/
+                text-transform: none;
                 font-weight: 100; 
                 margin-bottom: 0;
                 margin-top: 10px;
@@ -113,14 +113,54 @@
                 margin-right: auto;
                 text-align: center;
             }
+            .love {
+                color:#C70000;
+            }
             .with-padding-below {
                 margin-bottom: 20px;
+            }
+            .with-height {
+                height: 100px;
+            }
+            html {
+                position: relative;
+                min-height: 100%;
+            }
+            body {
+                /* Margin bottom by footer height */
+                margin-bottom: 60px;
+            }
+            .footer {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                /* Set the fixed height of the footer here */
+                height: 60px;
+
+                font-family:"Roboto",sans-serif;
+                color:#FF5959;
+                font-size: 18px;
+                text-transform: none;
+                font-weight:bold;
+                margin-bottom: 0;
+                margin-top: 10px;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+            .container {
+                width: auto;
+                max-width: 680px;
+                padding: 0 15px;
+            }
+            .container .text-muted {
+                margin: 20px 0;
             }
         </style>
     </head>
     <body>
         <div id="title" class="title"><span class="title-front">CLEMEN</span><span class="title-back">CHARTS</span></div>
-        <div id="subtitle" class="subtitle">because love should be quantified</div>
+        <div id="subtitle" class="subtitle">because <span class="love">love</span> should be quantified</div>
 
         <div class="row with-padding-below">
             <div class="col-md-6">
@@ -213,12 +253,19 @@
                 </div>
             </div>
         </div> 
+        <div class="row with-padding-below with-height"></div>
+
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted"><a style="color:#FF5959" href="https://github.com/jessex/clemencharts">Hecho con amor</a> <a style="color:#FF5959" href="https://jessex.ch">por Joshua</a></p>
+            </div>
+        </footer>
     </body>
 </html>
 
 <script>
             Chart.defaults.global.scaleFontFamily = "'Roboto',sans-serif";
-            Chart.defaults.global.scaleFontSize = 11;            
+            Chart.defaults.global.scaleFontSize = 11;
 
             // happiness chart 
             var happinessData = {
