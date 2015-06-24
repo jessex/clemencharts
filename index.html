@@ -42,6 +42,13 @@
                 zoom:1;
                 *display:inline; /* this fix is needed for IE7- */
             }
+            .graph-legend-long li {
+                margin-bottom : 10px;
+                width:300px;
+                display: inline-block;
+                zoom:1;
+                *display:inline; /* this fix is needed for IE7- */
+            }
             .graph-legend li:first-letter {
                 text-transform: capitalize;
             }
@@ -565,20 +572,20 @@
                     value: 99,
                     color:"#23EB98",
                     highlight: "#1DC47F",
-                    label: "Pre-Clementine ability to discern birds and mammals"
+                    label: "Mammal recognition pre-Clementine"
                 },
                 {
                     value: 1,
                     color:"#FF5959",
                     highlight: "#FF2B2B",
-                    label: "With Clementine ability to discern birds and mammals"
+                    label: "Mammal recognition with Clementine"
                 }
             ];
 
             var taxonomy = document.getElementById('taxonomy').getContext('2d');
             var taxonomyChart = new Chart(taxonomy).Pie(taxonomyData, {
                 responsive : true,
-                legendTemplate : "<ul class=\"graph-legend\"><% for (var i=0; i<segments.length; i++){%><li><div class=\"comm-how\"></div><span style=\"background-color:<%=segments[i].fillColor%>\"></span><div class=\"legend-text\"><%if(segments[i].label){%><%=segments[i].label%><%}%></div></li><%}%></ul>"
+                legendTemplate : "<ul class=\"graph-legend graph-legend-long\"><% for (var i=0; i<segments.length; i++){%><li><div class=\"comm-how\"></div><span style=\"background-color:<%=segments[i].fillColor%>\"></span><div class=\"legend-text\"><%if(segments[i].label){%><%=segments[i].label%><%}%></div></li><%}%></ul>"
             });
 
             var legendHolder = document.getElementById('taxonomyLegend')
